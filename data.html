@@ -10,6 +10,30 @@
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/4.1.2/papaparse.js"></script>
+    <script>
+        function arrayToTable(tableData) {
+            var table = $('<table></table>');
+            $(tableData).each(function (i, rowData) {
+                var row = $('<tr></tr>');
+                $(rowData).each(function (j, cellData) {
+                    row.append($('<td>'+cellData+'</td>'));
+                });
+                table.append(row);
+            });
+            return table;
+        }
+
+        $.ajax({
+            type: "GET",
+            url: "WebVisualizations/Resources/cities.csv",
+            success: function (data) {
+                $('body').append(arrayToTable(Papa.parse(data).data));
+            }
+        });
+    </script>
+    
     <style>
       a:active > img, a:focus > img , img:active, img:focus {
         border:2px solid rgb(24, 170, 56);
@@ -57,17 +81,25 @@
       <br>
       <div class="row mx-lg-n5 justify-content-around">
         <div class="col-lg-6 py-3 px-lg-3 border bg-light">
-          <h2>Wind Speed</h2>
+          <h2>Summary: Latitude vs. X</h2>
           <hr>
           <div class="square">
             <div>
-              <img src="WebVisualizations/Resources/assets/images/Fig4.png" class="img-fluid" alt="Fig1" style="float:left; margin: 5px;">
+              <img src="WebVisualizations/Resources/assets/images/Fig1.png" class="img-fluid" alt="Fig1" style="float:left; margin: 5px; max-width: 50%;">
             </div>
             <p>
-              There seems to be cities with higher wind speeds between
-              55 and 75 degrees latitude. However, there is no discernable
-              relationship between latitude and wind speed probably because
-              land and water features play a larger role than latitude. 
+              The purpose of this project was to analyze how weather changes
+              as you get closer to the equator. To accomplish this analysis,
+              we first pulled data from the OpenWeatherMap API to assemble
+              a dataset on over 500 cities. 
+              <br>
+              <br>
+              After assembling the dataset, we used Matplotlib to plot various
+              aspects of the weather vs. latitude. Factors we looked at included:
+              temperature, cloudiness, wind speed, and humidity. This site provides 
+              the source data and visualizations created as part of the analysis, 
+              as well as explanations and descriptions of any trends and correlations
+              witnessed.
             </p>
           </div>   
           
