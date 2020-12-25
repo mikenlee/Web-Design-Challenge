@@ -12,7 +12,27 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/4.1.2/papaparse.js"></script>
-    
+    <script>
+      function arrayToTable(tableData) {
+          var table = $('<table class="table table-striped table-bordered"></table>');
+          $(tableData).each(function (i, rowData) {
+              var row = $('<tr></tr>');
+              $(rowData).each(function (j, cellData) {
+                  row.append($('<td>'+cellData+'</td>'));
+              });
+              table.append(row);
+          });
+          return table;
+      }
+
+      $.ajax({
+          type: "GET",
+          url: "https://raw.githubusercontent.com/mikenlee/Web-Design-Challenge/main/cities.csv",
+          success: function (data) {
+              $('p').append(arrayToTable(Papa.parse(data).data));
+          }
+      });
+  </script>
     
     <style>
       a:active > img, a:focus > img , img:active, img:focus {
@@ -49,7 +69,7 @@
                   <a class="nav-link" href="#">Comparison</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Data</a>
+                <a class="nav-link" href="data.html">Data</a>
               </li>
           </ul>
       </div>
@@ -66,27 +86,10 @@
           The following table includes all of the data used for 
           plotting during this project.
           <div class="square">
-            <script>
-              function arrayToTable(tableData) {
-                  var table = $('<table></table>');
-                  $(tableData).each(function (i, rowData) {
-                      var row = $('<tr></tr>');
-                      $(rowData).each(function (j, cellData) {
-                          row.append($('<td>'+cellData+'</td>'));
-                      });
-                      table.append(row);
-                  });
-                  return table;
-              }
-      
-              $.ajax({
-                  type: "GET",
-                  url: "https://github.com/mikenlee/Web-Design-Challenge/blob/main/cities.csv",
-                  success: function (data) {
-                      $('body').append(arrayToTable(Papa.parse(data).data));
-                  }
-              });
-          </script>
+            <br>
+            <p>
+
+            </p>
           </div>   
           
           <hr>
