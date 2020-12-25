@@ -81,7 +81,7 @@
       
               $.ajax({
                   type: "GET",
-                  url: "WebVisualizations/Resources/cities.csv",
+                  url: "https://github.com/mikenlee/Web-Design-Challenge/blob/main/cities.csv",
                   success: function (data) {
                       $('body').append(arrayToTable(Papa.parse(data).data));
                   }
